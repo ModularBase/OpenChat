@@ -24,15 +24,17 @@ const BadgeSection = styled.div`
 const Profile = ({ user }) => {
   const [username, setUsername] = useState('');
   const [avatarUrl, setAvatarUrl] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (user) {
       setUsername(user.username || 'Anonymous');
       setAvatarUrl(user.avatar_url || 'https://via.placeholder.com/100');
+      setLoading(false);
     }
   }, [user]);
 
-  if (!user) {
+  if (loading) {
     return <p>Loading profile...</p>;
   }
 

@@ -3,12 +3,12 @@ import styled from 'styled-components';
 
 const SidebarContainer = styled.div`
   width: 300px;
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  background-color: #121212;
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid rgba(255, 255, 255, 0.3);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
 `;
 
 const ProfileSection = styled.div`
@@ -26,6 +26,19 @@ const Avatar = styled.img`
 
 const Username = styled.h3`
   color: white;
+  font-weight: 500;
+`;
+
+const AdminLink = styled.a`
+  color: white;
+  text-decoration: none;
+  background-color: #333;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+  &:hover {
+    background-color: #06b6d4;
+  }
 `;
 
 const Sidebar = ({ user }) => (
@@ -36,7 +49,11 @@ const Sidebar = ({ user }) => (
         <Username>{user.username || 'User'}</Username>
       </div>
     </ProfileSection>
-    {/* User list removed */}
+
+    {/* Show Admin Panel link if the user is an admin */}
+    {user?.isAdmin && (
+      <AdminLink href="/admin">Admin Panel</AdminLink>
+    )}
   </SidebarContainer>
 );
 

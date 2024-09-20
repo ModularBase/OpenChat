@@ -28,8 +28,12 @@ const AdminPanel = () => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const { data } = await supabase.from('profiles').select('*');
-      setUsers(data);
+      const { data, error } = await supabase.from('profiles').select('*');
+      if (error) {
+        console.error('Error fetching users:', error.message);
+      } else {
+        setUsers(data);
+      }
     };
 
     fetchUsers();
